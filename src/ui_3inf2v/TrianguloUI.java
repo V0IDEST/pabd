@@ -5,6 +5,7 @@
 package ui_3inf2v;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -87,17 +88,14 @@ public class TrianguloUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(18, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 27, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -108,16 +106,14 @@ public class TrianguloUI extends javax.swing.JFrame {
                                 .addGap(3, 3, 3)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(calc, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSeparator2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(tipoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(areaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tipoLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(areaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -181,40 +177,52 @@ public class TrianguloUI extends javax.swing.JFrame {
         double p = (a + b + c) / 2;
         return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
-        
-        
+
+
     private void calcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcActionPerformed
         // TODO add your handling code here:
-        double a = Double.parseDouble(jTextField1.getText());
-        double b = Double.parseDouble(jTextField2.getText());
-        double c = Double.parseDouble(jTextField3.getText());
-        
-        //MÁGICA
-        
-        tipoLabel.setText("Tipo encontrado");
-        areaLabel.setText("Área encontrada");
-        
-        if (isTriangle(a, b, c)) {
 
-            tipoLabel.setText("Tipo = " + typeTriangle(a, b, c));
-            areaLabel.setText(
-                    String.format("Área = %.4f", areaTriangle(a, b, c))
+        if (jTextField1.getText().equals("")
+                || jTextField2.getText().equals("")
+                || jTextField3.getText().equals("")) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Preencha todos os lados",
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE
             );
         } else {
-            tipoLabel.setText("NÃO É um triângulo!");
-            tipoLabel.setForeground(Color.CYAN);
-            areaLabel.setText("");
+            double a = Double.parseDouble(jTextField1.getText());
+            double b = Double.parseDouble(jTextField2.getText());
+            double c = Double.parseDouble(jTextField3.getText());
+
+            //MÁGICA
+            tipoLabel.setText("Tipo encontrado");
+            areaLabel.setText("Área encontrada");
+
+            if (isTriangle(a, b, c)) {
+
+                tipoLabel.setText("Tipo = " + typeTriangle(a, b, c));
+                areaLabel.setText(
+                        String.format("Área = %.4f", areaTriangle(a, b, c))
+                );
+            } else {
+                tipoLabel.setText("NÃO É um triângulo!");
+                tipoLabel.setForeground(Color.CYAN);
+                areaLabel.setText("");
+            }
         }
-        
+
     }//GEN-LAST:event_calcActionPerformed
-        private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {    
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
         tipoLabel.setText("Tipo = ?");
         tipoLabel.setForeground(Color.black);
         areaLabel.setText("Área = ?");
-        }
+    }
+
     /**
      * @param args the command line arguments
      */
