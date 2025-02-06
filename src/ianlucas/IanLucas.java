@@ -12,6 +12,13 @@ import java.sql.*;
  */
 public class IanLucas {
 
+    //cd "C:\Users\20221074010018\OneDrive - IFRN\Documentos\NetBeansProjects\IanLucas"
+    //git add .
+    //git commit -m "2v parte 1"
+    //git push -u origin main
+
+    public IanLucas() {
+    }
     /**
      * @param args the command line arguments
      * @throws java.sql.SQLException
